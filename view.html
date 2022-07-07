@@ -6,15 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
 
-        <script type="text/javascript" src="mysql.js"></script>
+        <script type="text/javascript" src="functions.js"></script>
     </head>
 
     <body>
         <h1>
             View Animals
         </h1>
-        <input type="text" placeholder="Animal ID"/>
-        <button onclick="fn1()" id="btn1">Submit</button>
+        <input type="text" id="searchText" placeholder="Animal ID"/>
+        <button onclick="getInformation()" id="button">Submit</button>
         </form>
     </body>
 </html>
