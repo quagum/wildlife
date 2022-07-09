@@ -1,4 +1,5 @@
 const express = require("express");
+const func = require("./functions.js");
 
 const app = express();
 
@@ -10,10 +11,11 @@ app.get("/", function(req, res) {
     res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/view.html", function(req, res){
-    res.sendFile(__dirname + "/view.html")
+app.get("/view", function(req, res){
+    res.sendFile(__dirname + "/view.html");
+    document.getElementsByID("data").innerHTML = func.getInformation();
 })
 
-app.get("/submission.html", function(req, res){
-    res.sendFile(__dirname + "/submission.html")
+app.get("/submission", function(req, res){
+    res.sendFile(__dirname + "/submission.html");
 })
