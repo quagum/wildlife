@@ -13,9 +13,10 @@ app.get("/", function(req, res) {
 
 app.get("/view", function(req, res){
     res.sendFile(__dirname + "/view.html");
-    document.getElementsByID("data").innerHTML = func.getInformation();
+    func.getInformation();
 })
 
 app.get("/submission", function(req, res){
     res.sendFile(__dirname + "/submission.html");
+    func.addInformation("BBBBB", "Female"); 
 })
