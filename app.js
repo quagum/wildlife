@@ -25,6 +25,6 @@ app.get("/view",
 app.get("/submission", 
     function(req, res){
         res.sendFile(__dirname + "/submission.html");
-        func.addInformation("BBBBB", "Female"); 
+        func.addInformation("CCCCC", "Male"); 
     }  
 );
