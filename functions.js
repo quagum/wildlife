@@ -33,25 +33,18 @@ function getInformation(){
 }
 
 function addInformation(ID, Sex){
-    con.connect(
-        function(err){
-            if(err){
-                throw err;
-            }
-            console.log('CONNECTED TO MYSQL DB');
-            var statement = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
-            var input = [ID, Sex]; 
+    var statement = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
+    var input = [ID, Sex]; 
 
-            con.query(statement, input, 
-                function(err, result, fields){
-                    if(err){
-                        throw err;
-                    } 
-                    console.log(result); 
-                }
-            );
+    con.query(statement, input, 
+    function(err, result, fields){
+        if(err){
+            throw err;
+        } 
+        else{
+            console.log(result); 
         }
-    );
+    });
 }
 
 module.exports = {getInformation, addInformation};

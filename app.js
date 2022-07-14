@@ -27,7 +27,6 @@ app.get("/view",
     async function(req, res){
         //res.sendFile(__dirname + "/view.html");
         const data = await func.getInformation();
-        console.log(data)
         res.render('view.ejs', {data: data});
     }
 );
