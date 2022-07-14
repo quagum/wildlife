@@ -1,42 +1,38 @@
 const mysql = require('mysql')
 
-function getInformation(callback){
-    const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "Turtle415_",
-        database:"wildlife"
-        });
-    con.connect(
-        function(err){
+const con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Turtle415_",
+    database:"wildlife"
+});
+con.connect(function(err){
+    if(err){
+        console.error("Connection Failed" + err.stack)
+    }
+    else{
+        console.log("Connection with mySQL Established")
+    }
+})
+
+function getInformation(){
+    return new Promise(function(resolve){
+        con.query("SELECT ID FROM animals;", function(err, result, fields){
             if(err){
-                throw err;
+                return err;
             }
-            console.log('CONNECTED TO MYSQL DB')
-            con.query("SELECT ID FROM animals;", 
-                function(err, result, fields){
-                    if(err){
-                        throw err;
-                    }
-                    var data = [result.length]
-                    for(var index in result){ //data is the index of each element in array 'result' 
-                        data[index] = result[index].ID; //result is an array of object named RowDataPacket 
-                    }
-                    console.log(data);
-                    return data; 
+            else{
+                var data = [result.length];
+                for(var index in result){ 
+                    data[index] = result[index].ID; //result is an array of object named RowDataPacket 
                 }
-            );
-        }
-    );
+                resolve(data); 
+            }
+        });
+    });
 }
 
 function addInformation(ID, Sex){
-    const con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "Turtle415_",
-        database:"wildlife"
-        });
     con.connect(
         function(err){
             if(err){
