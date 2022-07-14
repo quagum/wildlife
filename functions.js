@@ -1,6 +1,6 @@
 const mysql = require('mysql')
 
-function getInformation(){
+function getInformation(callback){
     const con = mysql.createConnection({
         host: "localhost",
         user: "root",
@@ -13,13 +13,17 @@ function getInformation(){
                 throw err;
             }
             console.log('CONNECTED TO MYSQL DB')
-            con.query("SELECT * FROM animals;", 
+            con.query("SELECT ID FROM animals;", 
                 function(err, result, fields){
                     if(err){
                         throw err;
                     }
-                    console.log(result[0].ID); //result is an array of object named RowDataPacket 
-                    return result[0].ID;
+                    var data = [result.length]
+                    for(var index in result){ //data is the index of each element in array 'result' 
+                        data[index] = result[index].ID; //result is an array of object named RowDataPacket 
+                    }
+                    console.log(data);
+                    return data; 
                 }
             );
         }
