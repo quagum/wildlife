@@ -9,10 +9,13 @@
 <body>
     <h3>
         Available Animal IDs
-        <% for(var i = 0; i < data.length; i++){ %> 
-            <%= data[i] %> 
-        <% } %> 
     </h3>
-    
+    <table border="1">
+        <% for(var i = 0; i < data.length; i++){ %> 
+        <tr>
+            <td> <%= data[i] %> </td>
+        </tr>
+        <% } %> 
+    </table>
 </body>
 </html>

@@ -6,16 +6,17 @@ const con = mysql.createConnection({
     password: "Turtle415_",
     database:"wildlife"
 });
+
 con.connect(function(err){
     if(err){
-        console.error("Connection Failed" + err.stack)
+        console.error("Connection Failed")
     }
     else{
         console.log("Connection with mySQL Established")
     }
 })
 
-function getInformation(){
+function getIDs(){
     return new Promise(function(resolve){
         con.query("SELECT ID FROM animals;", function(err, result, fields){
             if(err){
@@ -42,12 +43,12 @@ function addInformation(ID, Sex){
             throw err;
         } 
         else{
-            console.log(result); 
+            console.log("Input into animals table succesfull"); 
         }
     });
 }
 
-module.exports = {getInformation, addInformation};
+module.exports = {getIDs, addInformation};
 
 
 
