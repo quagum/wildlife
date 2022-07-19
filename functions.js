@@ -1,5 +1,9 @@
+const fastcsv = require('fast-csv');
+const { rmSync } = require('fs');
 const mysql = require('mysql')
 const config = require('./config.js')
+
+
 const con = mysql.createConnection(config.db);
 
 con.connect(function(err){
@@ -36,7 +40,23 @@ function getGPS(ID){
                 return err;
             }
             else{
-                resolve(result); 
+                const jsonData = JSON.parse(JSON.stringify(result));
+                resolve(jsonData)
+            }
+        });
+    });
+}
+
+function getBiography(ID){
+    return new Promise(function(resolve){
+        query = "SELECT biography.Text_path, biography.Video_path FROM animals INNER JOIN biography ON animals.ID=biography.ID WHERE animals.ID=\"" + ID +"\"";
+        con.query(query, function(err, result, fields){
+            if(err){
+                return err;
+            }
+            else{
+                const jsonData = JSON.parse(JSON.stringify(result));
+                resolve(jsonData)
             }
         });
     });
@@ -57,7 +77,7 @@ function addInformation(ID, Sex){
     });
 }
 
-module.exports = {getIDs, addInformation, getGPS};
+module.exports = {getIDs, addInformation, getGPS, getBiography};
 
 
 
