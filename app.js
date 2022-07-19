@@ -31,7 +31,7 @@ app.get("/view/:animalID", async function(req, res){
     console.log(data);
 });
 
-app.post("/submission", function(req, res){
+app.get("/submission", function(req, res){
     res.sendFile(__dirname + "/submission.html");
     func.addInformation("GGGGG", "Female"); 
 });
