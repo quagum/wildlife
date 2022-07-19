@@ -1,11 +1,6 @@
 const mysql = require('mysql')
-
-const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Turtle415_",
-    database:"wildlife"
-});
+const config = require('./config.js')
+const con = mysql.createConnection(config.db);
 
 con.connect(function(err){
     if(err){
@@ -33,6 +28,20 @@ function getIDs(){
     });
 }
 
+function getGPS(ID){
+    return new Promise(function(resolve){
+        query = "SELECT gps.Latitude, gps.Longitude, gps.DateTime FROM animals INNER JOIN gps ON animals.ID=gps.ID WHERE animals.ID=\"" + ID +"\"";
+        con.query(query, function(err, result, fields){
+            if(err){
+                return err;
+            }
+            else{
+                resolve(result); 
+            }
+        });
+    });
+}
+
 function addInformation(ID, Sex){
     var statement = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
     var input = [ID, Sex]; 
@@ -48,7 +57,7 @@ function addInformation(ID, Sex){
     });
 }
 
-module.exports = {getIDs, addInformation};
+module.exports = {getIDs, addInformation, getGPS};
 
 
 
