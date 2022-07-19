@@ -25,7 +25,13 @@ app.get("/view", async function(req, res){
     res.render('view.ejs', {data: data});
 });
 
-app.get("/submission", function(req, res){
+app.get("/view/:animalID", async function(req, res){
+    ID = String(req.params.animalID)
+    const data = await func.getGPS(ID);
+    console.log(data);
+});
+
+app.post("/submission", function(req, res){
     res.sendFile(__dirname + "/submission.html");
-    func.addInformation("DDDDD", "Female"); 
+    func.addInformation("GGGGG", "Female"); 
 });
