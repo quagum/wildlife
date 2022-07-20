@@ -1,11 +1,9 @@
-const fastcsv = require('fast-csv');
-const { rmSync } = require('fs');
+//imports mysql package and config
 const mysql = require('mysql')
 const config = require('./config.js')
-
-
+//creates con object using config.js information
 const con = mysql.createConnection(config.db);
-
+//connects to mySQL using con object
 con.connect(function(err){
     if(err){
         console.error("Connection Failed")
@@ -14,7 +12,7 @@ con.connect(function(err){
         console.log("Connection with mySQL Established")
     }
 })
-
+//queries for all animal IDs
 function getIDs(){
     return new Promise(function(resolve){
         con.query("SELECT ID FROM animals;", function(err, result, fields){
@@ -31,7 +29,7 @@ function getIDs(){
         });
     });
 }
-
+//queries for all lat, long, dateTime available specific to inputted animalID
 function getGPS(ID){
     return new Promise(function(resolve){
         query = "SELECT gps.Latitude, gps.Longitude, gps.DateTime FROM animals INNER JOIN gps ON animals.ID=gps.ID WHERE animals.ID=\"" + ID +"\"";
@@ -46,7 +44,7 @@ function getGPS(ID){
         });
     });
 }
-
+//queries for all biography information available to specific inputted animalID
 function getBiography(ID){
     return new Promise(function(resolve){
         query = "SELECT biography.Text_path, biography.Video_path FROM animals INNER JOIN biography ON animals.ID=biography.ID WHERE animals.ID=\"" + ID +"\"";
@@ -61,7 +59,7 @@ function getBiography(ID){
         });
     });
 }
-
+//adds information to database given input animalID and sex
 function addInformation(ID, Sex){
     var statement = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
     var input = [ID, Sex]; 
@@ -76,7 +74,7 @@ function addInformation(ID, Sex){
         }
     });
 }
-
+//exports functions to be used in other files
 module.exports = {getIDs, addInformation, getGPS, getBiography};
 
 

@@ -1,0 +1,34 @@
+Wildlife Mapping Project
+
+The goal of the work in this directory is to create a backend that can be used by the team to process, save, and load data to their VR map.
+Using Node.js (Express) and mySQL the backend was created. Currently the mySQL database is local and very crudely formatted with no foreign/primary key restraints. 
+
+app.js is the file run using "node app.js" to start a node server listening for HTTP requests. Currently it is hosted locally on 3000 port. 
+
+config.js is the file storing the mySQL credentials and is accessed by functions.js. since config.js contains data such as passwords its not public and is ignored by git. created config.js in the same directory as follows...
+-------------------------------------
+const config = {
+    db: {
+        host: "localhost",
+        user: "root",
+        password: "Turtle415_",
+        database:"wildlife"
+    }
+  };
+module.exports = config;
+-------------------------------------
+
+functions.js stores all the middleware which queries data from mySQL and returns the data after some processing
+
+index.html is the main webpage used as the homepage to view the queried data
+
+view.ejs and submission.html are the webpages used to view the queried and submit data
+submission.html is very primative and so only have the ability to submit/save data hardcoded into the app.js routes
+
+
+GOALS:
+app.js should only be the node server listening for HTTP requests and should not house all of the routes. Routes should be moved to a different file/folder however when moved to a sub-directory there are issues in accessing them that needs to be solved.
+
+the routes should be split. a set of routes using "/view" and another "/data" where "/view" would load the proper ejs file with queried data while "/view" routes would return the data only. with a "/data" route HTTP requests can be made through Unity which would return the queried data. 
+
+the mySQL database/schema needs to be revamped interms of adding more information such as animal-species and other formalities such as primary/foreign key pairing
