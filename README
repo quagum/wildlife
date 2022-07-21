@@ -23,6 +23,7 @@ functions.js stores all the middleware which queries data from mySQL and returns
 index.html is the main webpage used as the homepage to view the queried data
 
 view.ejs and submission.html are the webpages used to view the queried and submit data
+view.html is retired and kept just in case
 submission.html is very primative and so only have the ability to submit/save data hardcoded into the app.js routes
 
 
