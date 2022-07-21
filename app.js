@@ -34,8 +34,7 @@ app.get("/view", async function(req, res){
 app.get("/view/:animalID", async function(req, res){
     ID = String(req.params.animalID)
     const data = await func.getGPS(ID);
-    console.log(data);
-    return data
+    res.json(data)
 });
 //listening for /submission HTTP request which will call the .addInformation middlware which inputs hardcoded data into mySQL database
 app.get("/submission", function(req, res){
