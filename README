@@ -28,7 +28,7 @@ submission.html is very primative and so only have the ability to submit/save da
 
 
 SHORT TERM GOALS:
-app.js should only be the node server listening for HTTP requests and should not house all of the routes. Routes should be moved to a different file/folder however when moved to a sub-directory there are issues in accessing them that needs to be solved.
+DONE -X- app.js should only be the node server listening for HTTP requests and should not house all of the routes. Routes should be moved to a different file/folder however when moved to a sub-directory there are issues in accessing them that needs to be solved.
 
 the routes should be split. a set of routes using "/view" and another "/data" where "/view" would load the proper ejs file with queried data while "/view" routes would return the data only. with a "/data" route HTTP requests can be made through Unity which would return the queried data. 
 
