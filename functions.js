@@ -15,14 +15,14 @@ con.connect(function(err){
 //queries for all animal IDs
 function getIDs(){
     return new Promise(function(resolve){
-        con.query("SELECT ID FROM animals;", function(err, result, fields){
+        con.query("SELECT ID FROM animals;", function(err, res, fields){
             if(err){
-                return err;
+                res.status(500).send("getIDs failed");
             }
             else{
-                var data = [result.length];
-                for(var index in result){ 
-                    data[index] = result[index].ID; //result is an array of object named RowDataPacket 
+                var data = [res.length];
+                for(var index in res){ 
+                    data[index] = res[index].ID; //result is an array of object named RowDataPacket 
                 }
                 resolve(data); 
             }
@@ -33,12 +33,12 @@ function getIDs(){
 function getGPS(ID){
     return new Promise(function(resolve){
         query = "SELECT gps.Latitude, gps.Longitude, gps.DateTime FROM animals INNER JOIN gps ON animals.ID=gps.ID WHERE animals.ID=\"" + ID +"\"";
-        con.query(query, function(err, result, fields){
+        con.query(query, function(err, res, fields){
             if(err){
-                return err;
+                res.status(500).send("getGPS failed");
             }
             else{
-                const jsonData = JSON.parse(JSON.stringify(result));
+                const jsonData = JSON.parse(JSON.stringify(res));
                 resolve(jsonData)
             }
         });
@@ -48,9 +48,9 @@ function getGPS(ID){
 function getBiography(ID){
     return new Promise(function(resolve){
         query = "SELECT biography.Text_path, biography.Video_path FROM animals INNER JOIN biography ON animals.ID=biography.ID WHERE animals.ID=\"" + ID +"\"";
-        con.query(query, function(err, result, fields){
+        con.query(query, function(err, res, fields){
             if(err){
-                return err;
+                res.status(500).send("getBiography failed");
             }
             else{
                 const jsonData = JSON.parse(JSON.stringify(result));
@@ -65,9 +65,9 @@ function addInformation(ID, Sex){
     var input = [ID, Sex]; 
 
     con.query(statement, input, 
-    function(err, result, fields){
+    function(err, res, fields){
         if(err){
-            throw err;
+            res.status(500).send("addInformation failed");
         } 
         else{
             console.log("Input into animals table succesfull"); 
