@@ -9,9 +9,9 @@ config.js is the file storing the mySQL credentials and is accessed by functions
 -------------------------------------
 const config = {
     db: {
-        host: "localhost",
-        user: "root",
-        password: "Turtle415_",
+        host: "...",
+        user: "...",
+        password: "...",
         database:"wildlife"
     }
   };
