@@ -16,5 +16,5 @@ app.get("/", function(req, res){
 const view = require("./routes/view.js");
 app.use('/view', view);
 
-const add = require("./routes/add.js");
-app.use('/add', add);
+const animals = require("./routes/animals.js");
+app.use('/animals', animals); 
