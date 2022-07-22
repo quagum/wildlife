@@ -12,6 +12,7 @@ con.connect(function(err){
         console.log("Connection with mySQL Established")
     }
 })
+
 //queries for all animal IDs
 function getIDs(){
     return new Promise(function(resolve){
@@ -60,11 +61,11 @@ function getBiography(ID){
     });
 }
 //adds information to database given input animalID and sex
-function addInformation(ID, Sex){
-    var statement = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
-    var input = [ID, Sex]; 
+function postInformation(ID, Sex){
+    var query = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
+    var params = [ID, Sex]; 
 
-    con.query(statement, input, 
+    con.query(query, params, 
     function(err, res, fields){
         if(err){
             res.status(500).send("addInformation failed");
@@ -75,7 +76,7 @@ function addInformation(ID, Sex){
     });
 }
 //exports functions to be used in other files
-module.exports = {getIDs, addInformation, getGPS, getBiography};
+module.exports = {getIDs, getGPS, getBiography, postInformation};
 
 
 

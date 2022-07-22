@@ -19,6 +19,7 @@ router.get("/", async function(req, res){
     const data = await func.getIDs();
     res.render(viewEJS, {data: data});
 });
+
 //listening for /view/:animalID HTTP request which stores the input ID after /view/ as a string and uses
 //that ID to query the mySQL database for a specific animals' GPS history
 //returns data in JSON format 
@@ -26,6 +27,11 @@ router.get("/:animalID", async function(req, res){
     ID = String(req.params.animalID)
     const data = await func.getGPS(ID);
     res.json(data)
+});
+
+router.get("/add", function(req, res){
+    submissionHTML = path.join(__dirname, '..', 'pages', 'submission.html')
+    res.sendFile(submissionHTML);
 });
 
 module.exports = router
