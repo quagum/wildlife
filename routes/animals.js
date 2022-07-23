@@ -16,4 +16,15 @@ router.get('/:animalID', async function(req, res){
     res.json(jsonData);
 })
 
+router.post('/:animalID/:sex', async function(req, res){
+    var animalID = req.params.animalID;
+    var sex = req.params.sex;
+    await func.postInformation(animalID, sex);
+})
+
+router.delete('/:animalID', async function(req, res){
+    var animalID = req.params.animalID;
+    await func.delID(animalID); 
+})
+
 module.exports = router 
