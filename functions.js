@@ -75,8 +75,20 @@ function postInformation(ID, Sex){
         }
     });
 }
+
+function deleteID(ID){
+    var query = "DELETE FROM animals WHERE ID = " + ID;
+    con.query(query, function(err, res){
+        if(err){
+            res.status(500).send("deleteID failed");
+        }
+        else{
+            console.log("Deleted ID from table");
+        }
+    });
+}
 //exports functions to be used in other files
-module.exports = {getIDs, getGPS, getBiography, postInformation};
+module.exports = {getIDs, getGPS, getBiography, postInformation, deleteID};
 
 
 
