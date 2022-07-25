@@ -1,7 +1,7 @@
 Wildlife Mapping Project
 
 The goal of the work in this directory is to create a backend that can be used by the team to process, save, and load data to their VR map.
-Using Node.js (Express) and mySQL the backend was created. Currently the mySQL database is local and very crudely formatted with no foreign/primary key restraints. 
+Using Node.js (Express) and mySQL the backend was created.
 
 app.js is the file run using "node app.js" to start a node server listening for HTTP requests. Currently it is hosted locally on 3000 port. 
 
@@ -20,21 +20,27 @@ module.exports = config;
 
 functions.js stores all the middleware which queries data from mySQL and returns the data after some processing
 
-index.html is the main webpage used as the homepage to view the queried data
+index.html is the main webpage used as the front-end homepage to view queried data
 
 view.ejs and submission.html are the webpages used to view the queried and submit data
 view.html is retired and kept just in case
+
 submission.html is very primative and so only have the ability to submit/save data hardcoded into the app.js routes
+
+animal.js contains routes that allow GET, POST, DELETE of limited number of animal data through HTTP calls ONLY 
 
 
 SHORT TERM GOALS:
 DONE -X- app.js should only be the node server listening for HTTP requests and should not house all of the routes. Routes should be moved to a different file/folder however when moved to a sub-directory there are issues in accessing them that needs to be solved.
 
-the routes should be split. a set of routes using "/view" and another "/data" where "/view" would load the proper ejs file with queried data while "/view" routes would return the data only. with a "/data" route HTTP requests can be made through Unity which would return the queried data. 
+DONE -X- the routes should be split. a set of routes using "/view" and another "/animals" where "/view" would load the proper ejs file with queried data while "/animals" routes would return the data only. with a "/animals" route HTTP requests can be made through Unity which would return the queried data. 
 
-ROUTES SHOULD BE RENAMED TO WHAT DATA IS ACCESSED RATHER THAN WHAT ACTION IS TAKEN... STANDARD IN DIFFERENTIATING VIEWING DATA IN HTML VS ONLY GETTING JSON USING SAME ROUTE NAME
+DONE -X- routes should be renamed to what data is accessed rather than what action is taken --> standard in differntiating viewting data in HTML vs only getting JSON 
 
-the mySQL database/schema needs to be revamped interms of adding more information such as animal-species and other formalities such as primary/foreign key pairing
+the mySQL database/schema needs to be revamped interms of adding more information such as animal-species 
+
+DONE -X-other formalities such as primary/foreign key pairing
+
 
 LONG TERM GOALS:
 planning of how inputted data should be handled/moderated
