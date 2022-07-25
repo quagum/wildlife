@@ -1,20 +1,23 @@
 CREATE TABLE `animals` (
    `ID` varchar(255) DEFAULT NULL,
-   `Sex` varchar(255) DEFAULT NULL
+   `Sex` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (ID)
  )
 
  CREATE TABLE `biography` (
-   `ID` varchar(255) DEFAULT NULL,
+   `biographyID` varchar(255) DEFAULT NULL,
    `Text_path` varchar(255) DEFAULT NULL,
-   `Video_path` varchar(255) DEFAULT NULL
+   `Video_path` varchar(255) DEFAULT NULL\
+   FOREIGN KEY (biographyID) REFERENCES animals(ID);
  )
 
  CREATE TABLE `gps` (
-   `ID` varchar(255) DEFAULT NULL,
+   `gpsID` varchar(255) DEFAULT NULL,
    `Latitude` decimal(7,5) DEFAULT NULL,
    `Longitude` decimal(7,5) DEFAULT NULL,
    `Date` timestamp NULL DEFAULT NULL,
    `Time` time DEFAULT NULL,
    `DateTime` timestamp NULL DEFAULT NULL,
    `Month` varchar(255) DEFAULT NULL
+   FOREIGN KEY (gpsID) REFERENCES animals(ID);
  ) 
