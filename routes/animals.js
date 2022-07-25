@@ -24,7 +24,7 @@ router.post('/:animalID/:sex', async function(req, res){
 
 router.delete('/:animalID', async function(req, res){
     var animalID = req.params.animalID;
-    await func.delID(animalID); 
+    await func.deleteID(animalID); 
 })
 
 module.exports = router 
