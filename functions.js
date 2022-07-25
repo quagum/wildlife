@@ -64,7 +64,6 @@ function getBiography(ID){
 function postInformation(ID, Sex){
     var query = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
     var params = [ID, Sex]; 
-
     con.query(query, params, 
     function(err, res, fields){
         if(err){
@@ -77,7 +76,8 @@ function postInformation(ID, Sex){
 }
 
 function deleteID(ID){
-    var query = "DELETE FROM animals WHERE ID = " + ID;
+    var ID = String(ID);
+    var query = "DELETE FROM animals WHERE ID = '" + ID + "'";
     con.query(query, function(err, res){
         if(err){
             res.status(500).send("deleteID failed");
