@@ -60,7 +60,7 @@ function getBiography(ID){
         });
     });
 }
-//adds information to database given input animalID and sex
+//adds information to animals table given input animalID and sex
 function postInformation(ID, Sex){
     var query = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
     var params = [ID, Sex]; 
@@ -87,6 +87,7 @@ function deleteID(ID){
         }
     });
 }
+
 //exports functions to be used in other files
 module.exports = {getIDs, getGPS, getBiography, postInformation, deleteID};
 
