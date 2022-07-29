@@ -1,8 +1,10 @@
 //imports mysql package and config
 const mysql = require('mysql')
 const config = require('./config.js')
+
 //creates con object using config.js information
 const con = mysql.createConnection(config.db);
+
 //connects to mySQL using con object
 con.connect(function(err){
     if(err){
@@ -30,10 +32,11 @@ function getIDs(){
         });
     });
 }
+
 //queries for all lat, long, dateTime available specific to inputted animalID
 function getGPS(ID){
     return new Promise(function(resolve){
-        query = "SELECT gps.Latitude, gps.Longitude, gps.DateTime FROM animals INNER JOIN gps ON animals.ID=gps.ID WHERE animals.ID=\"" + ID +"\"";
+        query = "SELECT gps.Latitude, gps.Longitude, gps.DateTime FROM animals INNER JOIN gps ON animals.ID=gps.gpsID WHERE animals.ID=\"" + ID +"\"";
         con.query(query, function(err, res, fields){
             if(err){
                 res.status(500).send("getGPS failed");
@@ -45,10 +48,11 @@ function getGPS(ID){
         });
     });
 }
-//queries for all biography information available to specific inputted animalID
+
+//queries for all biography information available to specific inputted ID
 function getBiography(ID){
     return new Promise(function(resolve){
-        query = "SELECT biography.Text_path, biography.Video_path FROM animals INNER JOIN biography ON animals.ID=biography.ID WHERE animals.ID=\"" + ID +"\"";
+        query = "SELECT biography.Text_path, biography.Video_path FROM animals INNER JOIN biography ON animals.ID=biography.biographyID WHERE animals.ID=\"" + ID +"\"";
         con.query(query, function(err, res, fields){
             if(err){
                 res.status(500).send("getBiography failed");
@@ -60,14 +64,15 @@ function getBiography(ID){
         });
     });
 }
-//adds information to animals table given input animalID and sex
+
+//adds information to animals table given input ID and sex
 function postInformation(ID, Sex){
     var query = "INSERT INTO animals(ID, Sex) VALUES(?,?)";
     var params = [ID, Sex]; 
     con.query(query, params, 
     function(err, res, fields){
         if(err){
-            res.status(500).send("addInformation failed");
+            console.log("addInformation failed");
         } 
         else{
             console.log("Input into animals table succesfull"); 
@@ -75,12 +80,13 @@ function postInformation(ID, Sex){
     });
 }
 
+//deletes rows in animals table given ID
 function deleteID(ID){
     var ID = String(ID);
     var query = "DELETE FROM animals WHERE ID = '" + ID + "'";
     con.query(query, function(err, res){
         if(err){
-            res.status(500).send("deleteID failed");
+            console.log("deleteID failed");
         }
         else{
             console.log("Deleted ID from table");
