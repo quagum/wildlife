@@ -23,11 +23,11 @@ functions.js stores all the middleware which queries data from mySQL and returns
 index.html is the main webpage used as the front-end homepage to view queried data
 
 view.ejs and submission.html are the webpages used to view the queried and submit data
-view.html is retired and kept just in case
 
 submission.html is very primative and so only have the ability to submit/save data hardcoded into the app.js routes
 
-animal.js contains routes that allow GET, POST, DELETE of limited number of animal data through HTTP calls ONLY 
+animals.js contains routes that serve HTML files to DISPLAY and GATHER data via website
+view.js contains routes that allow GET, POST, DELETE of limited number of animal data through HTTP calls ONLY 
 
 
 SHORT TERM GOALS:

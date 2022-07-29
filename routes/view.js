@@ -12,14 +12,14 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine','ejs');
 app.set('views', __dirname + '/')
 
-//routes 
-//listening for /view HTTP request which serves ejs file of displaying available animalIDs
+//default "view" route serves EJS file of all available IDs in animals table
 router.get("/", async function(req, res){
     viewEJS = path.join(__dirname, '..', 'pages', 'view.ejs')
     const data = await func.getIDs();
     res.render(viewEJS, {data: data});
 });
 
+//attempts to send submitted file (NO MIDDELWARE IS BUILT TO PROCESS YET)
 router.get("/add", function(req, res){
     submissionHTML = path.join(__dirname, '..', 'pages', 'submission.html')
     res.sendFile(submissionHTML);
